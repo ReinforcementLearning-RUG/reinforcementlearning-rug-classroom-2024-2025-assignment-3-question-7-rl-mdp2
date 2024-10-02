@@ -57,4 +57,11 @@ class MCEvaluator(AbstractEvaluator):
 
         :param episode: A list of (state, action, reward) tuples.
         """
-        pass
+        dict_with_states = {}
+        for i in episode:
+            if i[0] not in dict_with_states.keys():
+                dict_with_states[i[0]] = i[2]
+            else:
+                dict_with_states[i[0]] += i[2]
+        self.returns = dict_with_states.copy()
+        return None
